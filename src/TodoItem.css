@@ -1,0 +1,68 @@
+.TodoItem {
+    background-color: #FAFAFA;
+    position: relative;
+    /* Centra los iconos y el texto horizontal y verticalmente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Divide cada elemento en casillas con un espaciado */
+    margin-top: 24px;
+    box-shadow: 0px 5px 50px rgba(32, 35, 41, 0.15); 
+}
+
+
+.TodoItem-p {
+    /* Le da margen a cada elemento */
+    margin: 24px 0 24px 24px;
+    /* Pone el check icon y el texto a la izquierda, y el delete icon a la derecha */
+    width: calc(100% - 120px);
+
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 400; 
+}
+
+.TodoItem-p--completed {
+    /* Subraya el texto cuando el ToDo se complete */
+    text-decoration: line-through;
+}
+
+.Icon {
+    cursor: pointer;
+    /* Centra vertical y horizontalmente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Hace el icono cuadrado */
+    height: 48px;
+    width: 48px;
+    /* Crece los iconos */
+    font-size: 24px;
+    /* Hace mas negritos los iconos */
+    font-weight: bold;
+}
+
+.Icon-check {
+    /* Como pones la posicion absoluta (lo centras), 
+    tienes que mandar el icono a la izquierda otra vez*/
+    position: absolute;
+    left: 12px;
+}
+
+.Icon-check--active {
+    /* Pone el icon check verde */
+    color: #4CAF50;
+}
+
+.Icon-delete {
+    position: absolute;
+    /* Subimos un poco el icono */
+    top: 10px;
+    /* Mandamos el icono a la derecha */
+    right: 0;
+}
+
+.Icon-delete:hover {
+    /* Ponemos el icono rojo cuando pasamos el cursor por encima */
+    color: red;
+}

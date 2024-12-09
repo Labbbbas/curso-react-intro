@@ -1,0 +1,32 @@
+.CreateTodoButton {
+    /* Color del boton */
+    background-color: #61DAFA;
+    box-shadow: 0px 5px 25px rgba(97, 218, 250, 0.5);
+    /* Le quita el borde y lo hace ovalado */
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 50px;
+    position: fixed;
+    /* Lo pone abajo a la derecha */
+    bottom: 24px;
+    right: 24px;
+    font-weight: bold;
+    /* Color del simbolo + */
+    color: #FAFAFA;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Para hacerlo redondo */
+    height: 64px;
+    width: 64px;
+
+    transform: rotate(0);
+    transition: 0.3s ease;
+}
+
+.CreateTodoButton:hover {
+    /* Para que tenga una animación cuando pones el cursor encima */
+    transform: rotate(180deg);
+}

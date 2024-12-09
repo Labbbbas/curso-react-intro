@@ -1,0 +1,37 @@
+.TodoSearch {
+    background: #F9FBFC;
+    /* Borde de la caja del input redondeado */
+    border-radius: 10px;
+    /* Todo el borde gris */
+    border: 2px solid gray;
+    /* Lo mueve un poco a la derecha */
+    margin: 0 24px;
+    /* Agranda su altura */
+    height: 64px;
+    /* La caja ocupa más width*/
+    width: calc(100% - 62px);
+    /* Aumenta el tamaño de la tecla del placeholder */
+    font-size: 24px;
+    /* Centra el texto del placeholder */
+    text-align: center;
+    font-family: 'Montserrat';
+    /* Para hacer más bold el texto que ingresas en el input */
+    font-weight: 400;
+    /* Color del texto cuando escribes en el input */
+    color: #1E1E1E;
+    /* Le da un sombreado al search */
+    box-shadow: 0px 5px 50px rgba(32, 35, 41, 0.25);
+}
+
+.TodoSearch::placeholder {
+    /* Color del texto a un gris */
+    color: #A5A5A5;
+    /* Cambiamos la tipografia */
+    font-family: 'Montserrat';
+    font-weight: 400;
+}
+
+.TodoSearch:focus {
+    /* Cuando le das click para buscar, el marco cambia a negro */
+    outline-color: black;
+}
