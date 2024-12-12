@@ -3,6 +3,7 @@ import { TodoList } from './TodoList';
 import { TodoSearch } from './TodoSearch';
 import { TodoItem } from './TodoItem';
 import { CreateTodoButton } from './CreateTodoButton';
+import React from 'react';
 
 const defaultTodos = [
   { text: 'Cortar cebolla',completed: true },
@@ -12,12 +13,26 @@ const defaultTodos = [
 ];
 
 function App() {
+  // Los estados tienen que estar en el componente padre (aquí en App) para poder comunicarse con los hijos
+  // No se puede comunicar de hijos a padres
+  const [searchValue, setSearchValue] = React.useState('');
+  console.log(searchValue);
+
+  const [todos, setTodos] = React.useState(defaultTodos);
+  // La !! es para remarcar que queremos valores verdaderos, si la quitamos no pasa nada
+  const completedTodos = todos.filter(todo => !!todo.completed).length;
+  const totalTodos = todos.length;
+
   return (
     <>
 
-      <TodoCounter completed={16} total={25} />
+      <TodoCounter completed={completedTodos} total={totalTodos} />
 
-      <TodoSearch />
+      <TodoSearch 
+        // Enviamos la variable y el actualizador como prop, se pueden llamar igual
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+      />
 
       <TodoList>
 
