@@ -34,10 +34,33 @@ function App() {
     }
   );
 
+  // Hacemos una copia de los todos, los modificamos de ser el caso, y los enviamos al setTodos
+  const completeTodo = (text) => {
+    const newTodos = [...todos];
+    const todoIndex = newTodos.findIndex((todo) => todo.text === text);
+    if (newTodos[todoIndex].completed === false) {
+      newTodos[todoIndex].completed = true;
+    }
+    else {
+      newTodos[todoIndex].completed = false;
+    }
+    setTodos(newTodos);
+  }
+
+  const deleteTodo = (text) => {
+    const newTodos = [...todos];
+    const todoIndex = newTodos.findIndex((todo) => todo.text === text);
+    newTodos.splice(todoIndex, 1);
+    setTodos(newTodos);
+  }
+
   return (
     <>
 
-      <TodoCounter completed={completedTodos} total={totalTodos} />
+      <TodoCounter 
+        completed={completedTodos} 
+        total={totalTodos}
+      />
 
       <TodoSearch 
         // Enviamos la variable y el actualizador como prop, se pueden llamar igual
@@ -52,6 +75,8 @@ function App() {
             key={todo.text} 
             text={todo.text}
             completed={todo.completed}
+            onComplete={() => completeTodo(todo.text)} // Cuando te completes, te enviamos un actualizador del estado
+            onDelete={() => deleteTodo(todo.text)}
           />
         ))}
 
