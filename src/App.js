@@ -5,12 +5,15 @@ import { TodoItem } from './TodoItem';
 import { CreateTodoButton } from './CreateTodoButton';
 import React from 'react';
 
-const defaultTodos = [
-  { text: 'Cortar cebolla',completed: false },
-  { text: 'Completar el curso de react de platzi',completed: false },
-  { text: 'LALALALA',completed: false },
-  { text: 'Ir a six flags',completed: false }
-];
+// const defaultTodos = [
+//   { text: 'Cortar cebolla',completed: false },
+//   { text: 'Completar el curso de react de platzi',completed: false },
+//   { text: 'LALALALA',completed: false },
+//   { text: 'Ir a six flags',completed: false }
+// ];
+
+// localStorage.setItem('TODOS_V1', JSON.stringify(defaultTodos));
+// localStorage.removeItem('TODOS_V1');
 
 function App() {
   // Los estados tienen que estar en el componente padre (aquí en App) para poder comunicarse con los hijos
@@ -19,7 +22,23 @@ function App() {
   const [searchValue, setSearchValue] = React.useState('');
   console.log(searchValue);
 
-  const [todos, setTodos] = React.useState(defaultTodos);
+  // NOTA IMPORTANTE: Para guardar algo en localStorage tenemos que "stringifiarlo"
+  // Y para leer algo del localStorage tenemos que "parsearlo"
+  const localStorageTodos = localStorage.getItem('TODOS_V1');
+  
+  let parsedTodos;
+
+  if (!localStorageTodos) {
+    // Guardamos el localStorage
+    localStorage.setItem('TODOS_V1', JSON.stringify( [] ));
+    parsedTodos = [];
+  }
+  else {
+    // Leemos el localStorage
+    parsedTodos = JSON.parse(localStorageTodos);
+  }
+
+  const [todos, setTodos] = React.useState(parsedTodos);
 
   // La !! es para remarcar que queremos valores verdaderos, si la quitamos no pasa nada
   const completedTodos = todos.filter(todo => !!todo.completed).length;
@@ -34,6 +53,14 @@ function App() {
     }
   );
 
+  // Función para actualizar el estado y el localStorage
+  const saveTodos = (newTodos) => {
+    // Primero lo guardamos en el estado
+    setTodos(newTodos);
+    // Y luego en el localStorage
+    localStorage.setItem('TODOS_V1', JSON.stringify(newTodos));
+  }
+
   // Hacemos una copia de los todos, los modificamos de ser el caso, y los enviamos al setTodos
   const completeTodo = (text) => {
     const newTodos = [...todos];
@@ -44,14 +71,14 @@ function App() {
     else {
       newTodos[todoIndex].completed = false;
     }
-    setTodos(newTodos);
+    saveTodos(newTodos);
   }
 
   const deleteTodo = (text) => {
     const newTodos = [...todos];
     const todoIndex = newTodos.findIndex((todo) => todo.text === text);
     newTodos.splice(todoIndex, 1);
-    setTodos(newTodos);
+    saveTodos(newTodos);
   }
 
   return (
