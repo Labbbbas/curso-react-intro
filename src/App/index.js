@@ -8,11 +8,15 @@ function App() {
 
   // Le pasamos el localStorage que queremos modificar y su valor inicial
   // Aquí ya podemos poner nombres acordes. En lugar de item, le ponemos ToDos
-  const [todos, saveTodos] = useLocalStorage('TODOS_V1', []);
+  const {
+    item: todos,
+    saveItem: saveTodos,
+    loading,
+    error
+  } = useLocalStorage('TODOS_V1', []);
 
   const [searchValue, setSearchValue] = React.useState('');
-  console.log(searchValue);
-  
+
   // La !! es para remarcar que queremos valores verdaderos, si la quitamos no pasa nada
   const completedTodos = todos.filter(todo => !!todo.completed).length;
   const totalTodos = todos.length;
@@ -21,8 +25,8 @@ function App() {
     (todo) => {
       const todoText = todo.text.toLowerCase();
       const searchText = searchValue.toLowerCase();
-      
-      return todoText.includes(searchText)
+
+      return todoText.includes(searchText);
     }
   );
 
@@ -49,14 +53,16 @@ function App() {
   }
 
   return (
-    <AppUI 
-    completedTodos={completedTodos}
-    totalTodos={totalTodos}
-    searchValue={searchValue}
-    setSearchValue={setSearchValue}
-    searchedTodos={searchedTodos}
-    completeTodo={completeTodo}
-    deleteTodo={deleteTodo}
+    <AppUI
+      loading={loading}
+      error={error}
+      completedTodos={completedTodos}
+      totalTodos={totalTodos}
+      searchValue={searchValue}
+      setSearchValue={setSearchValue}
+      searchedTodos={searchedTodos}
+      completeTodo={completeTodo}
+      deleteTodo={deleteTodo}
     />
   )
 }

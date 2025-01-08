@@ -1,5 +1,6 @@
 import React from "react";
 
+// localStorage.removeItem('TODOS_V1');
 
 // const defaultTodos = [
 //   { text: 'Cortar cebolla',completed: false },
@@ -9,44 +10,68 @@ import React from "react";
 // ];
 
 // localStorage.setItem('TODOS_V1', JSON.stringify(defaultTodos));
-// localStorage.removeItem('TODOS_V1');
+
 
 
 // Esta función nos va a permitir trabajar con el localStorage para ToDos y para cualquier 
 // otra cosa; ya que los tratamos como items, es decir, elementos de manera general
 function useLocalStorage(itemName, initialValue) {
-  // NOTA IMPORTANTE: Para guardar algo en localStorage tenemos que "stringifiarlo"
-  // Y para leer algo del localStorage tenemos que "parsearlo"
+    // NOTA IMPORTANTE: Para guardar algo en localStorage tenemos que "stringifiarlo"
+    // Y para leer algo del localStorage tenemos que "parsearlo"
 
-  // Nos traemos el item que queremos el localStorage
-  const localStorageItem = localStorage.getItem(itemName); 
-  
-  // Variable para leer nuestros items
-  let parsedItem;
+    // Nuestro estado almacena la info del localStorage
+    const [item, setItem] = React.useState(initialValue);
 
-  if (!localStorageItem) { // Si el localStorage que buscamos está vacío
-    // Guardamos el localStorage como un array vacío
-    localStorage.setItem(itemName, JSON.stringify(initialValue));
-    parsedItem = [];
-  }
-  else { // Si sí tenemos algo en el localStorage 
-    // Leemos el localStorage
-    parsedItem = JSON.parse(localStorageItem);
-  }
+    // Creamos dos nuevos estados
+    const [loading, setLoading] = React.useState(true);
+    const [error, setError] = React.useState(false);
 
-  // Nuestro estado almacena la info del localStorage
-  const [item, setItem] = React.useState(parsedItem);
+    // Encapsulamos el llamado al localStorage en un efecto
+    React.useEffect(() => {
+        setTimeout(() => {
+            try {
+                // Nos traemos el item que queremos el localStorage
+                const localStorageItem = localStorage.getItem(itemName);
 
-  // Función para actualizar el estado y el localStorage
-  const saveItem = (newItem) => {
-    // Primero lo guardamos en el estado
-    setItem(newItem);
-    // Y luego en el localStorage
-    localStorage.setItem(itemName, JSON.stringify(newItem));
-  }
+                // Variable para leer nuestros items
+                let parsedItem;
 
-  // Devolvemos el contenido y el actualizador del estado y el localStorage
-  return [item, saveItem];
+                if (!localStorageItem) { // Si el localStorage que buscamos está vacío
+                    // Guardamos el localStorage como un array vacío
+                    localStorage.setItem(itemName, JSON.stringify(initialValue));
+                    parsedItem = [];
+                }
+                else { // Si sí tenemos algo en el localStorage 
+                    // Leemos el localStorage
+                    parsedItem = JSON.parse(localStorageItem);
+                    setItem(parsedItem);
+                }
+
+                // Para cuando termine de cargar
+                setLoading(false);
+            }
+            catch (error) {
+                setLoading(false);
+                setError(true);
+            }
+        }, 2000);
+    }, []);
+
+    // Función para actualizar el estado y el localStorage
+    const saveItem = (newItem) => {
+        // Primero lo guardamos en el estado
+        setItem(newItem);
+        // Y luego en el localStorage
+        localStorage.setItem(itemName, JSON.stringify(newItem));
+    }
+
+    // Devolvemos el contenido y el actualizador del estado y el localStorage
+    return {
+        item,
+        saveItem,
+        loading,
+        error
+    };
 }
 
 export { useLocalStorage };
