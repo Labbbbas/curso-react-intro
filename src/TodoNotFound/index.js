@@ -1,19 +1,18 @@
 import { Box } from "@mui/material";
 
-function EmptyTodos() {
+function TodoNotFound() {
     return (
         <Box sx={{
-            display: 'flex',
+            display:'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            height: '50vh',
+            height: '50vh'
         }}>
             <p style={{
-                fontWeight: 'bold',
                 fontSize: '1.2em'
-            }}> ¡Crea tu primer ToDo! </p>
-        </Box> 
-    );
+            }}> No se encontraron coincidencias </p>
+        </Box>
+    )
 }
 
-export { EmptyTodos };
+export { TodoNotFound };

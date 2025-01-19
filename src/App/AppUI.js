@@ -7,8 +7,22 @@ import { TodosLoading } from '../TodosLoading';
 import { TodosError } from '../TodosError';
 import { EmptyTodos } from '../EmptyTodos';
 import { TodoContext } from '../TodoContext';
+import React from 'react';
+import { TodoNotFound } from '../TodoNotFound';
 
 function AppUI() {
+    const {
+        loading,
+        error,
+        searchedTodos,
+        completeTodo,
+        deleteTodo,
+        totalTodos
+    } = React.useContext(TodoContext)
+
+    // console.log(typeof totalTodos, totalTodos); // Es un number
+    // console.log(typeof searchedTodos, searchedTodos); // Es un object
+
     return (
         <>
 
@@ -24,32 +38,23 @@ function AppUI() {
             // setSearchValue={setSearchValue}
             />
 
-            <TodoContext.Consumer>
-                {({
-                    loading,
-                    error,
-                    searchedTodos,
-                    completeTodo,
-                    deleteTodo
-                }) => ( // Encapsulamos en una Render Function
-                    <TodoList>
-                        {loading && <TodosLoading />}
-                        {error && <TodosError />}
-                        {(!loading && searchedTodos.length === 0) && <EmptyTodos />}
+            <TodoList>
+                {loading && <TodosLoading />}
+                {error && <TodosError />}
+                {(!loading && totalTodos === 0) && <EmptyTodos />}
+                {(!loading && searchedTodos.length === 0 && totalTodos > 0) && <TodoNotFound />}
 
-                        {searchedTodos.map(todo => (
-                            <TodoItem
-                                key={todo.text}
-                                text={todo.text}
-                                completed={todo.completed}
-                                onComplete={() => completeTodo(todo.text)} // Cuando te completes, te enviamos un actualizador del estado
-                                onDelete={() => deleteTodo(todo.text)}
-                            />
-                        ))}
+                {searchedTodos.map(todo => (
+                    <TodoItem
+                        key={todo.text}
+                        text={todo.text}
+                        completed={todo.completed}
+                        onComplete={() => completeTodo(todo.text)} // Cuando te completes, te enviamos un actualizador del estado
+                        onDelete={() => deleteTodo(todo.text)}
+                    />
+                ))}
 
-                    </ TodoList >
-                )}
-            </TodoContext.Consumer>
+            </ TodoList >
 
             <CreateTodoButton />
 

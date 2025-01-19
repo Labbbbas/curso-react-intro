@@ -1,8 +1,16 @@
 import './TodoCounter.css';
 import { FaFlagCheckered } from "react-icons/fa";
 import { FaHandPeace } from "react-icons/fa6";
+import { TodoContext } from '../TodoContext';
+import React from 'react';
 
-function TodoCounter({ total, completed, isLoading }) {
+function TodoCounter() {
+    const {
+        loading: isLoading,
+        completedTodos: completed,
+        totalTodos: total,
+    } = React.useContext(TodoContext);
+
     return (
         isLoading
             ? <h1 className='TodoCounter'> Bienvenido <FaHandPeace /> </h1>
