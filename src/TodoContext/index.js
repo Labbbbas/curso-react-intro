@@ -31,6 +31,26 @@ function TodoProvider({ children }) {
         }
     );
 
+    const addTodo = (text) => {
+        if (text.trim().length === 0) {
+            alert('No se puede agregar un ToDo vacío');
+        }
+        else {
+            const newTodos = [...todos];
+            const existentTodo = newTodos.find((todo) => todo.text === text)
+            if (existentTodo) {
+                alert('Ese ToDo ya existe');
+            }
+            else {
+                newTodos.push({
+                    text,
+                    completed: false
+                })
+                saveTodos(newTodos);
+            }
+        }
+    }
+
     // Hacemos una copia de los todos, los modificamos de ser el caso, y los enviamos al setTodos
     const completeTodo = (text) => {
         const newTodos = [...todos];
@@ -65,7 +85,8 @@ function TodoProvider({ children }) {
             completeTodo,
             deleteTodo,
             openModal,
-            setOpenModal
+            setOpenModal,
+            addTodo
         }}>
             {children}
         </TodoContext.Provider>

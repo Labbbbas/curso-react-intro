@@ -1,3 +1,4 @@
+import React from 'react';
 import { TodoCounter } from '../TodoCounter';
 import { TodoList } from '../TodoList';
 import { TodoSearch } from '../TodoSearch';
@@ -6,10 +7,10 @@ import { CreateTodoButton } from '../CreateTodoButton';
 import { TodosLoading } from '../TodosLoading';
 import { TodosError } from '../TodosError';
 import { EmptyTodos } from '../EmptyTodos';
-import { TodoContext } from '../TodoContext';
-import React from 'react';
 import { TodoNotFound } from '../TodoNotFound';
 import { Modal } from '../Modal';
+import { TodoForm } from '../TodoForm';
+import { TodoContext } from '../TodoContext';
 
 function AppUI() {
     const {
@@ -20,7 +21,6 @@ function AppUI() {
         deleteTodo,
         totalTodos,
         openModal,
-        setOpenModal,
     } = React.useContext(TodoContext)
 
     // console.log(typeof totalTodos, totalTodos); // Es un number
@@ -63,7 +63,7 @@ function AppUI() {
 
             {openModal && (
                 <Modal>
-                    La funcionalidad de transportar ToDos
+                    <TodoForm />
                 </Modal>
             )}
         </>
