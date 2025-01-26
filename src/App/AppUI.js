@@ -9,6 +9,7 @@ import { EmptyTodos } from '../EmptyTodos';
 import { TodoContext } from '../TodoContext';
 import React from 'react';
 import { TodoNotFound } from '../TodoNotFound';
+import { Modal } from '../Modal';
 
 function AppUI() {
     const {
@@ -17,7 +18,9 @@ function AppUI() {
         searchedTodos,
         completeTodo,
         deleteTodo,
-        totalTodos
+        totalTodos,
+        openModal,
+        setOpenModal,
     } = React.useContext(TodoContext)
 
     // console.log(typeof totalTodos, totalTodos); // Es un number
@@ -58,6 +61,11 @@ function AppUI() {
 
             <CreateTodoButton />
 
+            {openModal && (
+                <Modal>
+                    La funcionalidad de transportar ToDos
+                </Modal>
+            )}
         </>
     );
 }

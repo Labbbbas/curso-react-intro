@@ -15,6 +15,9 @@ function TodoProvider({ children }) {
 
     const [searchValue, setSearchValue] = React.useState('');
 
+    // Estado del modal
+    const [openModal, setOpenModal] = React.useState(false);
+
     // La !! es para remarcar que queremos valores verdaderos, si la quitamos no pasa nada
     const completedTodos = todos.filter(todo => !!todo.completed).length;
     const totalTodos = todos.length;
@@ -60,7 +63,9 @@ function TodoProvider({ children }) {
             setSearchValue,
             searchedTodos,
             completeTodo,
-            deleteTodo
+            deleteTodo,
+            openModal,
+            setOpenModal
         }}>
             {children}
         </TodoContext.Provider>
