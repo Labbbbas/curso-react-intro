@@ -8,8 +8,10 @@ import { TodosLoading } from '../TodosLoading';
 import { TodosError } from '../TodosError';
 import { EmptyTodos } from '../EmptyTodos';
 import { TodoNotFound } from '../TodoNotFound';
-import { Modal } from '../Modal';
-import { TodoForm } from '../TodoForm';
+import { CreateModal } from '../CreateModal';
+import { CreateTodoForm } from '../CreateTodoForm';
+import { EditModal } from '../EditModal';
+import { EditTodoForm } from '../EditTodoForm';
 import { TodoContext } from '../TodoContext';
 
 function AppUI() {
@@ -20,7 +22,12 @@ function AppUI() {
         completeTodo,
         deleteTodo,
         totalTodos,
-        openModal,
+        openCreateModal,
+        // Importamos los estados para editar un ToDo
+        openEditModal,
+        setOpenEditModal,
+        currentEditTodo,
+        setCurrentEditTodo,
     } = React.useContext(TodoContext)
 
     // console.log(typeof totalTodos, totalTodos); // Es un number
@@ -54,6 +61,11 @@ function AppUI() {
                         completed={todo.completed}
                         onComplete={() => completeTodo(todo.text)} // Cuando te completes, te enviamos un actualizador del estado
                         onDelete={() => deleteTodo(todo.text)}
+                        onEdit={() => {
+                            // Guardamos el texto del ToDo a editar en su respectivo estadoy abrimos el modal de edición
+                            setCurrentEditTodo(todo.text); 
+                            setOpenEditModal(!openEditModal); 
+                        }}
                     />
                 ))}
 
@@ -61,10 +73,16 @@ function AppUI() {
 
             <CreateTodoButton />
 
-            {openModal && (
-                <Modal>
-                    <TodoForm />
-                </Modal>
+            {openCreateModal && (
+                <CreateModal>
+                    <CreateTodoForm />
+                </CreateModal>
+            )}
+
+            {openEditModal && (
+                <EditModal>
+                    <EditTodoForm /> 
+                </EditModal>
             )}
         </>
     );

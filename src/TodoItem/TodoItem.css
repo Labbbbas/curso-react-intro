@@ -72,3 +72,17 @@
     /* Ponemos el icono rojo cuando pasamos el cursor por encima */
     color: red;
 }
+
+.Icon-edit {
+    position: absolute;
+    /* Subimos un poco el icono */
+    top: 12px;
+    /* Mandamos el icono a la derecha */
+    right: 40px;
+    color: gray;
+}
+
+.Icon-edit:hover {
+    /* Ponemos el icono rojo cuando pasamos el cursor por encima */
+    color: #61DAFA;
+}

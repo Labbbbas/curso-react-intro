@@ -15,8 +15,14 @@ function TodoProvider({ children }) {
 
     const [searchValue, setSearchValue] = React.useState('');
 
-    // Estado del modal
-    const [openModal, setOpenModal] = React.useState(false);
+    // Estado del modal del create
+    const [openCreateModal, setOpenCreateModal] = React.useState(false);
+
+    // Estado del modal del edit
+    const [openEditModal, setOpenEditModal] = React.useState(false);
+
+    // Estado del valor del ToDo a editar
+    const [currentEditTodo, setCurrentEditTodo] = React.useState('');
 
     // La !! es para remarcar que queremos valores verdaderos, si la quitamos no pasa nada
     const completedTodos = todos.filter(todo => !!todo.completed).length;
@@ -73,6 +79,13 @@ function TodoProvider({ children }) {
         saveTodos(newTodos);
     }
 
+    const editTodo = (originalText, newText) => {
+        const newTodos = [...todos];
+        const todoIndex = newTodos.findIndex((todo) => todo.text === originalText);
+        newTodos[todoIndex].text = newText;
+        saveTodos(newTodos);
+    }
+
     return (
         <TodoContext.Provider value={{
             loading,
@@ -84,9 +97,14 @@ function TodoProvider({ children }) {
             searchedTodos,
             completeTodo,
             deleteTodo,
-            openModal,
-            setOpenModal,
-            addTodo
+            editTodo,
+            openEditModal,
+            setOpenEditModal,
+            openCreateModal,
+            setOpenCreateModal,
+            addTodo,
+            currentEditTodo,
+            setCurrentEditTodo
         }}>
             {children}
         </TodoContext.Provider>

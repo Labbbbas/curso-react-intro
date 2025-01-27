@@ -1,10 +1,10 @@
 import React from "react";
-import './TodoForm.css'
+import './CreateTodoForm.css'
 import { TodoContext } from "../TodoContext";
 
-function TodoForm() {
+function CreateTodoForm() {
     const {
-        setOpenModal,
+        setOpenCreateModal,
         addTodo
     } = React.useContext(TodoContext);
 
@@ -14,11 +14,11 @@ function TodoForm() {
     const onSubmit = (event) => {
         event.preventDefault();
         addTodo(newTodoValue.trim());
-        setOpenModal(false);
+        setOpenCreateModal(false);
     }
 
     const onCancel = () => {
-        setOpenModal(false);
+        setOpenCreateModal(false);
     }
 
     const onChange = (event) => {
@@ -35,15 +35,15 @@ function TodoForm() {
                 autoFocus
                 required
             />
-            <div className="TodoForm-buttonContainer">
+            <div className="CreateTodoForm-buttonContainer">
                 <button
                     type="button"
-                    className="TodoForm-button TodoForm-button--cancel"
+                    className="CreateTodoForm-button CreateTodoForm-button--cancel"
                     onClick={onCancel}
                 >Cancelar</button>
                 <button
                     type="submit"
-                    className="TodoForm-button TodoForm-button--add"
+                    className="CreateTodoForm-button CreateTodoForm-button--add"
                     onClick={onSubmit}
                 >Añadir</button>
             </div>
@@ -51,4 +51,4 @@ function TodoForm() {
     )
 }
 
-export { TodoForm };
+export { CreateTodoForm };
