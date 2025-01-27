@@ -9,7 +9,8 @@ function TodoNotFound() {
             height: '50vh'
         }}>
             <p style={{
-                fontSize: '1.2em'
+                fontSize: '1.2em',
+                textAlign: 'center'
             }}> No se encontraron coincidencias </p>
         </Box>
     )
