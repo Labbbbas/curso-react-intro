@@ -13,9 +13,9 @@
 
 .TodoItem-p {
     /* Le da margen a cada elemento */
-    margin: 24px 0 24px 24px;
+    margin: 24px 10px 24px 0;
     /* Pone el check icon y el texto a la izquierda, y el delete icon a la derecha */
-    width: calc(100% - 120px);
+    width: calc(100% - 155px);
 
     font-size: 18px;
     line-height: 24px;
@@ -50,10 +50,6 @@
     left: 12px;
 }
 
-.Icon-check:hover {
-    color: #4CAF50;
-}
-
 .Icon-check--active {
     /* Pone el icon check verde */
     color: #4CAF50;
@@ -65,11 +61,7 @@
     top: 12px;
     /* Mandamos el icono a la derecha */
     right: 0;
-    color: gray;
-}
-
-.Icon-delete:hover {
-    /* Ponemos el icono rojo cuando pasamos el cursor por encima */
+    top:auto;
     color: red;
 }
 
@@ -79,10 +71,6 @@
     top: 12px;
     /* Mandamos el icono a la derecha */
     right: 40px;
-    color: gray;
-}
-
-.Icon-edit:hover {
-    /* Ponemos el icono rojo cuando pasamos el cursor por encima */
+    top:auto;
     color: #007BFF;
 }
