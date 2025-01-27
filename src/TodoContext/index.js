@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocalStorage } from "./useLocalStorage";
-
+import { toast } from 'react-toastify';
 const TodoContext = React.createContext();
 
 function TodoProvider({ children }) {
@@ -39,13 +39,15 @@ function TodoProvider({ children }) {
 
     const addTodo = (text) => {
         if (text.trim().length === 0) {
-            alert('No se puede agregar un ToDo vacío');
+            toast.error("¡El ToDo no puede estar vacío!");
+            return;
         }
         else {
             const newTodos = [...todos];
             const existentTodo = newTodos.find((todo) => todo.text === text)
             if (existentTodo) {
-                alert('Ese ToDo ya existe');
+                toast.error('¡Este ToDo ya existe! No puedes tener dos iguales.');
+                return;
             }
             else {
                 newTodos.push({
@@ -53,6 +55,7 @@ function TodoProvider({ children }) {
                     completed: false
                 })
                 saveTodos(newTodos);
+                setOpenCreateModal(false);
             }
         }
     }
@@ -80,10 +83,31 @@ function TodoProvider({ children }) {
     }
 
     const editTodo = (originalText, newText) => {
+        // Si el texto nuevo está vacío, no hacemos nada
+        if (newText.trim().length === 0) {
+            toast.error("¡El ToDo no puede estar vacío!");
+            return;
+        }
+
+        // Si el texto nuevo es igual al original, no hacemos nada
         const newTodos = [...todos];
+        const existentTodo = newTodos.find((todo) => todo.text === newText)
+        if (existentTodo && originalText === newText) {
+            toast.error('¡El ToDo no puede ser igual al original!');
+            return;
+        }
+
+        // Si el texto nuevo ya existe, no hacemos nada
+        if (existentTodo) {
+            toast.error('¡Este ToDo ya existe! No puedes tener dos iguales.');
+            return;
+        }
+
+        // Si todo está bien, editamos el ToDo
         const todoIndex = newTodos.findIndex((todo) => todo.text === originalText);
         newTodos[todoIndex].text = newText;
         saveTodos(newTodos);
+        setOpenEditModal(false);
     }
 
     return (

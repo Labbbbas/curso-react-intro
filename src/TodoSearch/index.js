@@ -5,18 +5,21 @@ import { TodoContext } from '../TodoContext';
 function TodoSearch() {
     const {
         searchValue,
-        setSearchValue
+        setSearchValue,
+        loading,
     } = React.useContext(TodoContext);
 
     return (
-        <input
-            placeholder="Cortar cebolla"
-            className='TodoSearch'
-            value={searchValue}
-            onChange={(event) => {
-                setSearchValue(event.target.value);
-            }}
-        />
+        loading
+            ? null
+            : <input
+                placeholder="Busca tu ToDo"
+                className='TodoSearch'
+                value={searchValue}
+                onChange={(event) => {
+                    setSearchValue(event.target.value);
+                }}
+            />
     );
 }
 

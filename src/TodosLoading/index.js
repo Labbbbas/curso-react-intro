@@ -4,10 +4,10 @@ import { Box } from '@mui/material';
 function TodosLoading() {
     return (
         <Box sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: '50vh'
+            position: 'absolute',
+            left: '50%',
+            top: '50%',
+            transform: 'translate(-50%, -50%)'
         }}>
             <CircularProgress />
         </Box>

@@ -3,13 +3,8 @@ import './TodoItem.css';
 import { LuCircleCheckBig } from "react-icons/lu";
 import { AiOutlineDelete } from "react-icons/ai";
 import { MdOutlineEdit } from "react-icons/md";
-import { TodoContext } from '../TodoContext';
 
 function TodoItem(props) {
-  const {
-    openEditModal,
-    setOpenEditModal,
-  } = React.useContext(TodoContext);
 
   return (
     <li className="TodoItem">

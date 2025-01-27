@@ -8,4 +8,23 @@
 
 .TodoCounter span {
     font-weight: bold;
+
+}
+
+.TodoCounterWelcomeMessage {
+    position: absolute;
+    top: 30%;  /* Vertical */
+    left: 50%; /* Horizontal */
+    transform: translate(-50%, -50%);  /* Centrado exacto */
+    display: flex;
+    gap: 5px;
+}
+
+h1 {
+    font-size: 24px;
+    text-align: center;
+    justify-content: center;
+    margin: 0;
+    padding: 48px;
+    font-weight: normal;
 }

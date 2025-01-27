@@ -1,5 +1,7 @@
 import React from "react";
 import './CreateTodoForm.css'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { TodoContext } from "../TodoContext";
 
 function CreateTodoForm() {
@@ -14,7 +16,6 @@ function CreateTodoForm() {
     const onSubmit = (event) => {
         event.preventDefault();
         addTodo(newTodoValue.trim());
-        setOpenCreateModal(false);
     }
 
     const onCancel = () => {
@@ -26,10 +27,11 @@ function CreateTodoForm() {
     }
 
     return (
+        <>
         <form onSubmit={onSubmit}>
-            <label>Escribe tu nuevo ToDo</label>
+            <label>Crea tu nuevo ToDo</label>
             <textarea 
-                placeholder="Cortar cebolla"
+                placeholder="..."
                 value={newTodoValue}
                 onChange={onChange}
                 autoFocus
@@ -48,6 +50,9 @@ function CreateTodoForm() {
                 >Añadir</button>
             </div>
         </form>
+
+        <ToastContainer position="top-center" autoClose={2000} hideProgressBar={true}/>
+        </>
     )
 }
 

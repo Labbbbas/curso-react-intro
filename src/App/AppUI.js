@@ -26,7 +26,6 @@ function AppUI() {
         // Importamos los estados para editar un ToDo
         openEditModal,
         setOpenEditModal,
-        currentEditTodo,
         setCurrentEditTodo,
     } = React.useContext(TodoContext)
 

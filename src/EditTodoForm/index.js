@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import './EditTodoForm.css'
 import { TodoContext } from "../TodoContext";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function EditTodoForm() {
     const {
@@ -26,7 +28,6 @@ function EditTodoForm() {
     const onSubmit = (event) => {
         event.preventDefault();
         editTodo(currentEditTodo, newTodoValue.trim());
-        setOpenEditModal(false);
     }
 
     const onCancel = () => {
@@ -38,16 +39,17 @@ function EditTodoForm() {
     }
 
     return (
-        <form onSubmit={onSubmit}>
-            <label>Edita el ToDo</label>
-            <textarea 
-                placeholder="Edita tu ToDo"
+        <>        <form onSubmit={onSubmit}>
+            <label>Edita tu ToDo</label>
+            <textarea
+                placeholder="..."
                 defaultValue={newTodoValue}
                 onChange={onChange}
                 autoFocus
-                required 
+                required
                 ref={textareaRef}  // Añadido ref
             />
+
             <div className="EditTodoForm-buttonContainer">
                 <button
                     type="button"
@@ -61,6 +63,9 @@ function EditTodoForm() {
                 >Guardar</button>
             </div>
         </form>
+
+            <ToastContainer position="top-center" autoClose={2000} hideProgressBar={true} />
+        </>
     )
 }
 
